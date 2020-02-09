@@ -1,0 +1,15 @@
+conda activate ViewBS
+### This step will generate several files:
+bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample2 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_2.sort.bam
+#
+bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample3 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_3.sort.bam
+
+bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample4 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_4.sort.bam
+
+bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample5 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_5.sort.bam
+
+bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample6 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_6.sort.bam
+
+bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample7 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_7.sort.bam
+
+coverage2cytosine -CX -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/cytosine/1_rep.cov --genome_folder ara/ test.bismark.cov
