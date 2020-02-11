@@ -1,7 +1,25 @@
 conda activate ViewBS
+
 ### This step will generate several files:
-bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample2 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_2.sort.bam
-#
+bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample2 --bedgraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_2.sort.bam
+
+##In samples 2,4,and 7 errors the following errors occured due to limits on open files. To solve: continue running bismark_methylation_extractor then move to bismark2bedGraph
+## remember to remove .temp files that were not erased due to computer aborting the code
+
+#Processed lines: 48000000
+#Processed lines: 48000000
+#Finished processing child process. Exiting..
+#Processed lines: 47000000
+#Finished processing child process. Exiting..
+#Processed lines: 43000000
+#Processed lines: 47000000
+
+#Now writing methylation information for file >>CpG_OB_zr2831_2.sort.txt<< to individual files for each chromosome
+#Failed to open filehandle: Too many open files at /home/hanahm1/miniconda3/envs/ViewBS/bin/bismark2bedGraph line 278, <IN> line 249872686.
+#Finished BedGraph conversion ...
+
+### End errors ###
+
 bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample3 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_3.sort.bam
 
 bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample4 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_4.sort.bam
@@ -12,4 +30,29 @@ bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Meth
 
 bismark_methylation_extractor -s -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample7 --bedGraph --CX --multicore 8 /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/BAM_Alignments/zr2831_7.sort.bam
 
+## Need to run code below for samples 2, 4, and 7 ##
+
+bismark2bedGraph -o F268.C_ --dir /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample2 --CX --scaffolds C*
+
+bismark2bedGraph -o F250.C --dir /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample4 --CX --scaffolds C*
+
+bismark2bedGraph -o F308.PI --dir /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample7 --CX --scaffolds C*
+
+## ##
+
 coverage2cytosine -CX -o /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/cytosine/1_rep.cov --genome_folder ara/ test.bismark.cov
+
+## To download bosTau9 genome into local directory##
+wget http://hgdownload.soe.ucsc.edu/goldenPath/bosTau9/bigZips/bosTau9.2bit
+
+twoBitToFa bosTau9.2bit bosTau9.fa #converts 2bit file to fa file in local directory
+
+gunzip zr2831_1.sort.bismark.cov.gz
+
+coverage2cytosine -CX -o F272_C.bis_rep.cov --genome_folder /lab_data/hansen_lab/hanahm1/bosTau9_genome /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample1/zr2831_1.sort.bismark.cov
+
+coverage2cytosine -CX -o F268_C.bis_rep.cov --genome_folder /lab_data/hansen_lab/hanahm1/bosTau9_genome /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample2/zr2831_2.sort.bismark.cov
+
+coverage2cytosine -CX -o F278_C.bis_rep.cov --genome_folder /lab_data/hansen_lab/hanahm1/bosTau9_genome /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample3/zr2831_3.sort.bismark.cov
+
+coverage2cytosine -CX -o F250_C.bis_rep.cov --genome_folder /lab_data/hansen_lab/hanahm1/bosTau9_genome /lab_data/hansen_lab/hanahm1/Methyl-Seq/Methyl-Seq_Data/Bismark_output/sample4/zr2831_4.sort.bismark.cov
